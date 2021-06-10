@@ -26,6 +26,7 @@
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 /* On Windows use the built-in Beep() function from <utilapiset.h> */
+#include <windows.h>
 int beep(int freq, int ms) { return Beep(freq, ms); }
 #elif __linux__
 /* On Linux use alsa in synchronous mode, open "default" device in signed 8-bit

@@ -21,18 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+/** 
+ *  @file   beep.h
+ *  @brief  cross platform beep
+ *  @author Serge Zaitsev
+ *  @date   2020
+ ***********************************************/
+
+/**
+ * #check if the macro is defined
+*/ 
 #ifndef BEEP_H
+/**
+ * #include guard
+*/ 
 #define BEEP_H
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 /* On Windows use the built-in Beep() function from <utilapiset.h> */
 #include <windows.h>
+/// beep
 int beep(int freq, int ms) { return Beep(freq, ms); }
 #elif __linux__
 /* On Linux use alsa in synchronous mode, open "default" device in signed 8-bit
  * mode at 8kHz, mono, request for 20ms latency. Device is opened on first call
  * and never closed. */
 #include <unistd.h>
+/// beep
 int beep(int freq, int ms) {
   static void *pcm = NULL;
   if (pcm == NULL) {
@@ -91,7 +107,7 @@ static OSStatus tone_cb(void *inRefCon,
   }
   return 0;
 }
-
+/// beep
 int beep(int freq, int ms) {
   if (!initialized) {
     AudioComponent output;

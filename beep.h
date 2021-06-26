@@ -48,6 +48,7 @@ int beep(int freq, int ms) { return Beep(freq, ms); }
  * mode at 8kHz, mono, request for 20ms latency. Device is opened on first call
  * and never closed. */
 #include <unistd.h>
+#define ALSA_PCM_NEW_HW_PARAMS_API
 #include <alsa/asoundlib.h>
 /// beep
 int beep(int freq, int ms) {
